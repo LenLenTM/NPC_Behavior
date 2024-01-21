@@ -19,8 +19,8 @@ public class Sequence : Node
                 case NodeState.Success:
                     continue;
                 case NodeState.Running:
-                    anyChildIsRunning = true;
-                    continue;
+                    state = NodeState.Running;
+                    return state;
                 default:
                     state = NodeState.Success;
                     return state;

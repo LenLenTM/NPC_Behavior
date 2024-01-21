@@ -22,10 +22,12 @@ public class GoToTarget : Node
                                 World.Speed * Time.deltaTime
                                 );
                         
+                        Debug.Log("GoToTarget_Running");
                         state = NodeState.Running;
                         return state;
                 }
 
+                Debug.Log("GoToTarget_Success");
                 state = NodeState.Success;
                 return state;
         }

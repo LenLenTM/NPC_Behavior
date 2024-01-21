@@ -22,23 +22,26 @@ public class EnemyInRange : Node
                                 parent.parent.SetData("enemy", enemyPosition);
                                 parent.parent.SetData("target", CalculateTargetVector(_transform, enemyPosition) );
                                 
-                                Debug.Log(enemyPosition.position);
+                                Debug.Log("EnemyInRange_Success(0)");
                                 state = NodeState.Success;
                                 return state;
                         }
+                        Debug.Log("EnemyInRange_Failure(0)");
                         state = NodeState.Failure;
                         return state;
                 }
 
                 if (enemyPosition == null)
                 {
-                        SetData("enemy", null);
+                        parent.parent.SetData("enemy", null);
+                        Debug.Log("EnemyInRange_Failure(1)");
                         state = NodeState.Failure;
                         return state;
                 }
                 
                 parent.parent.SetData("target", CalculateTargetVector(_transform, enemyPosition));
                 
+                Debug.Log("EnemyInRange_Success(1)");
                 state = NodeState.Success;
                 return state;
         }
@@ -47,8 +50,7 @@ public class EnemyInRange : Node
         {
                 foreach (Enemy enemy in World.Enemies)
                 {
-                        Debug.Log(enemy.transform.position);
-                        if (Vector2.Distance(transform.position, enemy.transform.position) < 6.1f)
+                        if (Vector2.Distance(transform.position, enemy.transform.position) < BT_Entity.ViewRange)
                         {
                                 return enemy.transform;
                         }
@@ -59,6 +61,6 @@ public class EnemyInRange : Node
 
         private Vector3 CalculateTargetVector(Transform entityPosition, Transform enemyPosition)
         {
-                return ((_transform.position - enemyPosition.position).normalized * BT_Entity.viewRange) + enemyPosition.position;
+                return ((_transform.position - enemyPosition.position).normalized * BT_Entity.ViewRange) + enemyPosition.position;
         }
 }
