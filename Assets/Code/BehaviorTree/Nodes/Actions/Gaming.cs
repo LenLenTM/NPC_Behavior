@@ -10,7 +10,7 @@
         if (leisureTime > 0 && leisureTyp.Equals("games"))
         {
             leisureTime--;
-            state = NodeState.Success;
+            state = NodeState.Running;
             return state;
         }
 
@@ -25,8 +25,8 @@
             parent.parent.SetData("leisure", "");
         }
                 
-        parent.parent.SetData("leisureTime", 0);
-        state = NodeState.Failure;
+        parent.parent.parent.SetData("leisureTime", 0);
+        state = NodeState.Success;
         return state;
     }
 }

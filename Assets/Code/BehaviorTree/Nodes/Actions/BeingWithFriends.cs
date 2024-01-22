@@ -4,13 +4,14 @@
 
     public override NodeState Evaluate()
     {
-        int leisureTime = (int)GetData("leisureTime");
         string leisureTyp = (string)GetData("leisure");
+        int leisureTime = (int)GetData("leisureTime");
+        
 
         if (leisureTime > 0 && leisureTyp.Equals("friends"))
         {
             leisureTime--;
-            state = NodeState.Success;
+            state = NodeState.Running;
             return state;
         }
 
@@ -25,8 +26,8 @@
             parent.parent.SetData("leisure", "");
         }
                 
-        parent.parent.SetData("leisureTime", 0);
-        state = NodeState.Failure;
+        parent.parent.parent.SetData("leisureTime", 0);
+        state = NodeState.Success;
         return state;
     }
 }

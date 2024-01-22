@@ -1,17 +1,20 @@
-﻿public class WatchingMovie : Node
+﻿
+using System;
+using UnityEngine;
+
+public class WatchingMovie : Node
 {
         public WatchingMovie(){}
 
         public override NodeState Evaluate()
         {
-                int leisureTime = 0;
-                leisureTime = (int)GetData("leisureTime");
+                var leisureTime = (int)GetData("leisureTime");
                 string leisureTyp = (string)GetData("leisure");
 
                 if (leisureTime > 0 && leisureTyp.Equals("cinema"))
                 {
                         leisureTime--;
-                        state = NodeState.Success;
+                        state = NodeState.Running;
                         return state;
                 }
 
@@ -26,8 +29,8 @@
                         parent.parent.SetData("leisure", "");
                 }
                 
-                parent.parent.SetData("leisureTime", 0);
-                state = NodeState.Failure;
+                parent.parent.parent.SetData("leisureTime", 0);
+                state = NodeState.Success;
                 return state;
         }
 }

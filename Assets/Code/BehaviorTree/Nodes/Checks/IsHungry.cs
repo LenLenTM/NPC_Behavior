@@ -51,7 +51,6 @@ public class IsHungry : Node
                 }
             }
         }
-        Debug.Log(nearest);
         return nearest;
     }
 }

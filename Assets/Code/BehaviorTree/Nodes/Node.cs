@@ -49,7 +49,7 @@ public class Node
                 return value;
             node = node.parent;
         }
-
+        
         return null;
     }
 

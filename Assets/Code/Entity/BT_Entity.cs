@@ -58,9 +58,18 @@ public class BT_Entity : Tree
             {
                 new ChooseLeisureActivity(transform),
                 new GoToTarget(transform),
-                new Not(new WatchingMovie()),
-                new Not(new BeingWithFriends()),
-                new Not(new Gaming())
+                new Not( new List<Node>()
+                {
+                    new WatchingMovie()
+                }),
+                new Not( new List<Node>()
+                {
+                    new BeingWithFriends()
+                }),
+                new Not( new List<Node>()
+                {
+                    new Gaming()
+                })
             }),
             
             // going home
@@ -76,7 +85,7 @@ public class BT_Entity : Tree
         root.SetData("hunger", (double)0);
         root.SetData("sleep", false);
         root.SetData("leisure", "");
-        root.SetData("leisureTime", 0);
+        root.SetData("leisureTime", (int)0);
         
         return root;
     }

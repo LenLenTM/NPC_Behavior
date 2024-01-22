@@ -14,8 +14,6 @@ public class Needs2Work : Node
         {
                 if (BT_Entity.Work.Work2Do > 1 && World.Time.Hour > 7 && World.Time.Hour < 20)
                 {
-                        Debug.Log("here");
-                        
                         parent.parent.SetData("target", World.Locations.FirstOrDefault(l => l.Typ.Equals(Locations.Work)).transform.position);
 
                         state = NodeState.Success;

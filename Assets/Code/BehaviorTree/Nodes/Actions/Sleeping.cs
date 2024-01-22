@@ -13,7 +13,7 @@
 
                 if (isSleeping)
                 {
-                        _sleep.Tiredness -= 0.00154 * World.Speed;
+                        _sleep.Tiredness -= 0.00454 * World.Speed;
                         if (_sleep.Tiredness < 0)
                         {
                                 _sleep.Tiredness = 0;
