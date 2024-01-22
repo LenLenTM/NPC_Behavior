@@ -15,7 +15,7 @@ public class Eating : Node
         
         if (_hunger.Hungry > hungryTarget)
         {
-            _hunger.Hungry -= 0.05;
+            _hunger.Hungry -= 0.025 * World.Speed;
 
             state = NodeState.Running;
             return state;

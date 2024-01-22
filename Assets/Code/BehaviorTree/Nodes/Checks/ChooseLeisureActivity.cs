@@ -37,7 +37,7 @@ public class ChooseLeisureActivity : Node
                                         parent.parent.SetData("leisure", "games");
                                         break;
                         }
-                        parent.parent.SetData("leisureTime", (int)200);
+                        parent.parent.SetData("leisureTime", (int)5000);
                         state = NodeState.Success;
                         return state;
                 }

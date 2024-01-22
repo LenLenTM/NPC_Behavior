@@ -9,7 +9,8 @@
 
         if (leisureTime > 0 && leisureTyp.Equals("games"))
         {
-            leisureTime--;
+            leisureTime -= 1 * World.Speed;
+            parent.parent.parent.SetData("leisureTime", leisureTime);
             state = NodeState.Running;
             return state;
         }
@@ -22,7 +23,7 @@
 
         if (leisureTime <= 0)
         {
-            parent.parent.SetData("leisure", "");
+            parent.parent.parent.SetData("leisure", "");
         }
                 
         parent.parent.parent.SetData("leisureTime", 0);

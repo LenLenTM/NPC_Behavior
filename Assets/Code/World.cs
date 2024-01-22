@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
 public class World : MonoBehaviour
@@ -13,6 +14,9 @@ public class World : MonoBehaviour
     private TextMeshPro timeText;
     public static DateTime Time;
 
+    public TextMeshPro SpeedText;
+    public Slider SpeedSlider;
+    
     public static List<Enemy> Enemies = new List<Enemy>();
     public static List<Location> Locations = new List<Location>();
 
@@ -32,5 +36,8 @@ public class World : MonoBehaviour
         {
             BT_Entity.Work.Work2Do = 50;
         }
+
+        Speed = (int)SpeedSlider.value;
+        SpeedText.SetText(Speed.ToString());
     }
 }
