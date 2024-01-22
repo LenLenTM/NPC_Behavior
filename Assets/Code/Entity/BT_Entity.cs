@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using Code.BehaviorTree.Nodes.Checks;
 using TMPro;
 using UnityEngine;
 
 public class BT_Entity : Tree
 {
     public static float ViewRange = 2f;
-    public static Hunger Hunger = new Hunger(0f);
-    public static double Tiredness = 0f;
-    public static double LeisureNeeds = 0f;
-    public static double Work2Do = 0f;
+    public Hunger Hunger = new Hunger(55f);
+    public Sleep Sleep = new Sleep(0f);
+    public static Work Work = new Work(55f);
 
     private TextMeshPro _hungerIndicator;
     private TextMeshPro _tirednessIndicator;
-    private TextMeshPro _leisureNeedsIndicator;
     private TextMeshPro _work2DoIndicator;
 
     protected override Node SetupTree()
@@ -40,13 +37,46 @@ public class BT_Entity : Tree
             }),
             
             // sleep
+            new Sequence(new List<Node>()
+            {
+                new IsTired(Sleep, transform),
+                new GoToTarget(transform),
+                new Sleeping(Sleep)
+            }),
+            
+            
             // work
+            new Sequence(new List<Node>()
+            {
+                new Needs2Work(transform),
+                new GoToTarget(transform),
+                new Working()
+            }),
+            
             // leisure activities
+            new Sequence(new List<Node>()
+            {
+                new ChooseLeisureActivity(transform),
+                new GoToTarget(transform),
+                new Not(new WatchingMovie()),
+                new Not(new BeingWithFriends()),
+                new Not(new Gaming())
+            }),
+            
+            // going home
+            new Sequence(new List<Node>()
+            {
+                new GoingHome(),
+                new GoToTarget(transform)
+            })
             
         });
 
         root.SetData("target", transform);
         root.SetData("hunger", (double)0);
+        root.SetData("sleep", false);
+        root.SetData("leisure", "");
+        root.SetData("leisureTime", 0);
         
         return root;
     }
@@ -55,23 +85,20 @@ public class BT_Entity : Tree
     {
         _hungerIndicator = gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>();
         _tirednessIndicator = gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshPro>();
-        _leisureNeedsIndicator = gameObject.transform.GetChild(2).gameObject.GetComponent<TextMeshPro>();
         _work2DoIndicator = gameObject.transform.GetChild(3).gameObject.GetComponent<TextMeshPro>();
     }
 
     private void LateUpdate()
     {
-        Hunger.Hungry += 0.003 * World.Speed;
-        Tiredness += 0.001 * World.Speed;
-        LeisureNeeds += 0.0005 * World.Speed;
+        Hunger.Hungry += 0.002 * World.Speed;
+        Sleep.Tiredness += 0.0015 * World.Speed;
         PrintUpdate();
     }
 
     private void PrintUpdate()
     {
         _hungerIndicator.SetText("Hunger: " + Math.Round(Hunger.Hungry, 2));
-        _tirednessIndicator.SetText("Tiredness: " + Math.Round(Tiredness, 2));
-        _leisureNeedsIndicator.SetText("LeisureNeeds: " + Math.Round(LeisureNeeds, 2));
-        _work2DoIndicator.SetText("Work2Do: " + Math.Round(Work2Do, 2));
+        _tirednessIndicator.SetText("Tiredness: " + Math.Round(Sleep.Tiredness, 2));
+        _work2DoIndicator.SetText("Work2Do: " + Math.Round(Work.Work2Do, 2));
     }
 }

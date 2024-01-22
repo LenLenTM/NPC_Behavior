@@ -19,15 +19,13 @@ public class GoToTarget : Node
                                 (
                                 _transform.position, 
                                 target, 
-                                World.Speed * Time.deltaTime
+                                World.Speed * Time.deltaTime * 2
                                 );
                         
-                        Debug.Log("GoToTarget_Running");
                         state = NodeState.Running;
                         return state;
                 }
 
-                Debug.Log("GoToTarget_Success");
                 state = NodeState.Success;
                 return state;
         }

@@ -6,9 +6,10 @@ public enum Locations
         Cinema,
         Eat,
         Games,
-        Sleep,
+        Bed,
         Work,
-        Friends
+        Friends,
+        Home
 }
 
 public abstract class Location : MonoBehaviour

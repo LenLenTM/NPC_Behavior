@@ -22,11 +22,9 @@ public class EnemyInRange : Node
                                 parent.parent.SetData("enemy", enemyPosition);
                                 parent.parent.SetData("target", CalculateTargetVector(_transform, enemyPosition) );
                                 
-                                Debug.Log("EnemyInRange_Success(0)");
                                 state = NodeState.Success;
                                 return state;
                         }
-                        Debug.Log("EnemyInRange_Failure(0)");
                         state = NodeState.Failure;
                         return state;
                 }
@@ -34,14 +32,12 @@ public class EnemyInRange : Node
                 if (enemyPosition == null)
                 {
                         parent.parent.SetData("enemy", null);
-                        Debug.Log("EnemyInRange_Failure(1)");
                         state = NodeState.Failure;
                         return state;
                 }
                 
                 parent.parent.SetData("target", CalculateTargetVector(_transform, enemyPosition));
                 
-                Debug.Log("EnemyInRange_Success(1)");
                 state = NodeState.Success;
                 return state;
         }
