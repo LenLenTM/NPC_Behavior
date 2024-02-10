@@ -6,7 +6,7 @@
     private bool loseSightOfPacMan;
     private bool eaten;
 
-    void WanderTheMaze()
+    private void WanderTheMaze()
     {
         while (true)
         {
@@ -24,7 +24,7 @@
         }
     }
 
-    void ChasePacMan()
+    private void ChasePacMan()
     {
         // chase algorithm
 
@@ -39,7 +39,7 @@
         }
     }
 
-    void FleePacMan()
+    private void FleePacMan()
     {
         // flee algorithm
         
@@ -54,7 +54,7 @@
         }
     }
 
-    void ReturnToBase()
+    private void ReturnToBase()
     {
         // return to base algorithm
         
