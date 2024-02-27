@@ -1,17 +1,9 @@
 ﻿public class FiniteStateMachine
 {
-
-    private bool spotPacMan;
-    private bool powerPellet;
-    private bool loseSightOfPacMan;
-    private bool eaten;
-
     private void WanderTheMaze()
     {
         while (true)
         {
-            // wander algorithm
-
             if (spotPacMan)
             {
                 ChasePacMan();
@@ -21,36 +13,44 @@
             {
                 FleePacMan();
             }
+            
+            // wander algorithm
         }
     }
 
     private void ChasePacMan()
     {
-        // chase algorithm
-
-        if (loseSightOfPacMan)
+        while (true)
         {
-            WanderTheMaze();
-        }
+            if (loseSightOfPacMan)
+            {
+                WanderTheMaze();
+            }
 
-        if (powerPellet)
-        {
-            FleePacMan();
+            if (powerPellet)
+            {
+                FleePacMan();
+            }
+            
+            // chase algorithm
         }
     }
 
     private void FleePacMan()
     {
-        // flee algorithm
-        
-        if (!powerPellet)
+        while (true)
         {
-            WanderTheMaze();
-        }
+            if (!powerPellet)
+            {
+                WanderTheMaze();
+            }
 
-        if (eaten)
-        {
-            ReturnToBase();
+            if (eaten)
+            {
+                ReturnToBase();
+            }
+            
+            // flee algorithm
         }
     }
 
@@ -60,5 +60,11 @@
         
         WanderTheMaze();
     }
+    
+    
+    private bool spotPacMan;
+    private bool powerPellet;
+    private bool loseSightOfPacMan;
+    private bool eaten;
     
 }

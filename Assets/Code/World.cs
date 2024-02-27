@@ -35,6 +35,7 @@ public class World : MonoBehaviour
         if (Time.ToString("HH:mm").Equals("00:00"))
         {
             BT_Entity.Work.Work2Do = 50;
+            FSM_Entity.Work.Work2Do = 50;
         }
 
         Speed = (int)SpeedSlider.value;
