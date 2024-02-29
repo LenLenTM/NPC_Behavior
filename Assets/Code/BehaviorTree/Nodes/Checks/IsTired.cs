@@ -18,6 +18,9 @@ public class IsTired : Node
 
                 if ((_sleep.Tiredness > 80 && !tiredSet) || World.Time.Hour > 22 )
                 {
+                        Logger.WriteLog("Sleeping. [Tiredness over 80 & daytime between 6:00 and 22:00.]");
+                        PerformanceMeter.StopStopwatch(1);
+                        
                         parent.parent.SetData("sleep", true);
                         parent.parent.SetData("target", World.Locations.FirstOrDefault(l => l.Typ.Equals(Locations.Bed)).transform.position);
 

@@ -7,11 +7,14 @@ public class GoWork_FSM : BaseState
     public override void Enter()
     {
         base.Enter();
+        Logger.WriteLog("Going to work. [WorkToDo > 1 & time between 7:00 and 20:00]");
+        PerformanceMeter.StopStopwatch(5);
     }
 
     public override void Update()
     {
         base.Update();
+        PerformanceMeter.StartStopwatch();
         var check = TransitionChecker.CheckTransition(_stateMachine);
         if (check.transition)
         {
@@ -19,6 +22,7 @@ public class GoWork_FSM : BaseState
         }
         else
         {
+            PerformanceMeter.ResetStopwatch();
             _stateMachine.transform.position = Vector3.MoveTowards
             (
                 _stateMachine.transform.position,

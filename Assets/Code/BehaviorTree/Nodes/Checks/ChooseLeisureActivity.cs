@@ -25,18 +25,22 @@ public class ChooseLeisureActivity : Node
                                         target = World.Locations.FirstOrDefault(l => l.Typ.Equals(Locations.Cinema)).transform.position;
                                         parent.parent.SetData("target", target);
                                         parent.parent.SetData("leisure", "cinema");
+                                        Logger.WriteLog("Decided to go to the cinema. [No other need to fulfill.]");
                                         break;
                                 case 1:
                                         target = World.Locations.FirstOrDefault(l => l.Typ.Equals(Locations.Friends)).transform.position;
                                         parent.parent.SetData("target", target);
                                         parent.parent.SetData("leisure", "friends");
+                                        Logger.WriteLog("Decided to meet with friends. [No other need to fulfill.]");
                                         break;
                                 case 2:
                                         target = World.Locations.FirstOrDefault(l => l.Typ.Equals(Locations.Games)).transform.position;
                                         parent.parent.SetData("target", target);
                                         parent.parent.SetData("leisure", "games");
+                                        Logger.WriteLog("Decided to play games. [No other need to fulfill.]");
                                         break;
                         }
+                        PerformanceMeter.StopStopwatch(3);
                         parent.parent.SetData("leisureTime", (int)5000);
                         state = NodeState.Success;
                         return state;

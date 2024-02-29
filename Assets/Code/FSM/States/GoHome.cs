@@ -7,12 +7,14 @@ public class GoHome : BaseState
         public override void Enter()
         {
                 base.Enter();
+                Logger.WriteLog("Going home. [nothing else to do]");
+                PerformanceMeter.StopStopwatch(2);
         }
 
         public override void Update()
         {
                 base.Update();
-                
+                PerformanceMeter.StartStopwatch();
                 var check = TransitionChecker.CheckTransition(_stateMachine);
                 if (check.transition)
                 {
@@ -20,6 +22,7 @@ public class GoHome : BaseState
                 }
                 else
                 {
+                        PerformanceMeter.ResetStopwatch();
                         _stateMachine.transform.position = Vector3.MoveTowards
                         (
                                 _stateMachine.transform.position,

@@ -17,7 +17,7 @@ public class TransitionChecker
             
             
             // Go to eat
-            if (stateMachine.Hunger.Hungry > 62 && World.Locations.Any(l => Vector3.Distance(l.transform.position, stateMachine.transform.position) > 0.01f && l.Typ == Locations.Eat))
+            if (stateMachine.Hunger.Hungry > 62 && !World.Locations.Any(l => Vector3.Distance(l.transform.position, stateMachine.transform.position) < 0.01f && l.Typ == Locations.Eat))
             {
                   if (!state.Equals(stateMachine.GoEat))
                   {
@@ -105,7 +105,7 @@ public class TransitionChecker
             }
             
             // GoHome
-            if (World.Locations.Any(l => Vector3.Distance(l.transform.position, stateMachine.transform.position) > 0.01f && l.Typ == Locations.Home))
+            if (World.Locations.Any(l => Vector3.Distance(l.transform.position, stateMachine.transform.position) > 0.1f && l.Typ == Locations.Home))
             {
                   if (!state.Equals(stateMachine.GoHome))
                   {
@@ -116,6 +116,12 @@ public class TransitionChecker
             }
             
             // Idle
-            return (true, stateMachine.Idle);
+
+            if (!state.Equals(stateMachine.Idle))
+            {
+                  transition = true;
+            }
+            state = stateMachine.Idle;
+            return (transition, state);
       }
 }

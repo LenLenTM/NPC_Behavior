@@ -1,8 +1,17 @@
 ﻿using System;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class FSM_Entity : StateMachine
 {
+        public Slider HungerSlider;
+        public Slider TirednessSlider;
+        public Slider WorkSlider;
+        public GameObject HungerValue;
+        public GameObject TirednessValue;
+        public GameObject WorkValue;
+        
         public static float ViewRange = 2f;
         public Hunger Hunger = new Hunger(55f);
         public Sleep Sleep = new Sleep(0f);
@@ -23,6 +32,13 @@ public class FSM_Entity : StateMachine
         public LeisureActivity Leisure;
         public GoLeisure GoLeisure;
 
+        public void ResetStats()
+        {
+                Hunger = new Hunger(55f);
+                Sleep = new Sleep(0f);
+                Work = new Work(55f);
+        }
+        
         private void Awake()
         {
                 InitChildren();
@@ -45,15 +61,25 @@ public class FSM_Entity : StateMachine
 
         private void InitChildren()
         {
-                _hungerIndicator = gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>();
-                _tirednessIndicator = gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshPro>();
-                _work2DoIndicator = gameObject.transform.GetChild(3).gameObject.GetComponent<TextMeshPro>();
+                _hungerIndicator = HungerValue.GetComponent<TextMeshPro>();
+                _tirednessIndicator = TirednessValue.GetComponent<TextMeshPro>();
+                _work2DoIndicator = WorkValue.GetComponent<TextMeshPro>();
+                
+                HungerSlider.value = (float)Hunger.Hungry;
+                TirednessSlider.value = (float)Sleep.Tiredness;
+                WorkSlider.value = (float)Work.Work2Do;
         }
 
         private void LateUpdate()
         {
                 Hunger.Hungry += 0.002 * World.Speed;
                 Sleep.Tiredness += 0.0015 * World.Speed;
+                HungerSlider.value = (float)Hunger.Hungry;
+                TirednessSlider.value = (float)Sleep.Tiredness;
+                WorkSlider.value = (float)Work.Work2Do;
+                Hunger.Hungry = HungerSlider.value;
+                Sleep.Tiredness = TirednessSlider.value;
+                Work.Work2Do = WorkSlider.value;
                 PrintUpdate();
         }
 
@@ -62,5 +88,20 @@ public class FSM_Entity : StateMachine
                 _hungerIndicator.SetText("Hunger: " + Math.Round(Hunger.Hungry, 2));
                 _tirednessIndicator.SetText("Tiredness: " + Math.Round(Sleep.Tiredness, 2));
                 _work2DoIndicator.SetText("Work2Do: " + Math.Round(Work.Work2Do, 2));
+        }
+
+        public void UpdateHunger(double value)
+        {
+                Hunger.Hungry += value;
+        }
+        
+        public void UpdateTiredness(double value)
+        {
+                Sleep.Tiredness += value;
+        }
+        
+        public void UpdateWork(double value)
+        {
+                Work.Work2Do += value;
         }
 }

@@ -38,4 +38,19 @@ public class GOAP_Entity : MonoBehaviour
         _tirednessIndicator.SetText("Tiredness: " + Math.Round(Sleep.Tiredness, 2));
         _work2DoIndicator.SetText("Work2Do: " + Math.Round(Work.Work2Do, 2));
     }
+    
+    public void UpdateHunger(double value)
+    {
+        Hunger.Hungry += value;
+    }
+        
+    public void UpdateTiredness(double value)
+    {
+        Sleep.Tiredness += value;
+    }
+        
+    public void UpdateWork(double value)
+    {
+        Work.Work2Do += value;
+    }
 }

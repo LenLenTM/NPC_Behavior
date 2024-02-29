@@ -14,6 +14,9 @@ public class Needs2Work : Node
         {
                 if (BT_Entity.Work.Work2Do > 1 && World.Time.Hour > 7 && World.Time.Hour < 20)
                 {
+                        Logger.WriteLog("Working. [Work left to do. Hunger < 62 & Tiredness < 80.]");
+                        PerformanceMeter.StopStopwatch(2);
+                        
                         parent.parent.SetData("target", World.Locations.FirstOrDefault(l => l.Typ.Equals(Locations.Work)).transform.position);
 
                         state = NodeState.Success;

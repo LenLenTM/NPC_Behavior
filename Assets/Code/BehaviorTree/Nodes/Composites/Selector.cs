@@ -7,6 +7,8 @@ public class Selector : Node
 
     public override NodeState Evaluate()
     {
+        
+        PerformanceMeter.StartStopwatch();
 
         foreach (Node node in children) 
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BackToMenu : MonoBehaviour
 {
-        public GameObject World;
+        public GameObject WorldObject;
         public GameObject Menu;
         public GameObject FSM_Entity;
         public GameObject BT_Entity;
@@ -12,10 +12,19 @@ public class BackToMenu : MonoBehaviour
 
         private void OnMouseDown()
         {
-                World.SetActive(false);
+                PerformanceMeter.ResetState();
+                DateTime today = DateTime.Now;
+                World.Time =  new DateTime(today.Year, today.Month, today.Day, 6, 0, 0);
+
+                BT_Entity.GetComponent<BT_Entity>().ResetStats();
+                FSM_Entity.GetComponent<FSM_Entity>().ResetStats();
+                
+                WorldObject.SetActive(false);
                 Menu.SetActive(true);
                 FSM_Entity.SetActive(false);
                 BT_Entity.SetActive(false);
                 GOAP_Entity.SetActive(false);
+                
+                
         }
 }

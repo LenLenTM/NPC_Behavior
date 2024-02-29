@@ -7,6 +7,8 @@ public class Sequence : Node
 
     public override NodeState Evaluate()
     {
+        PerformanceMeter.StartStopwatch();
+        
         bool anyChildIsRunning = false;
         
         foreach (Node node in children) 

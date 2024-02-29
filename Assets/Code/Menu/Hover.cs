@@ -1,7 +1,4 @@
-﻿using System;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditor;
+﻿using TMPro;
 using UnityEngine;
 
 public class Hover : MonoBehaviour

@@ -17,6 +17,9 @@ public class IsHungry : Node
         
         if (_hunger.Hungry > 62 && hungerSet == 0 && !(bool)GetData("sleep"))
         {
+            Logger.WriteLog("Eating. [Hunger over 62 & not sleeping.]");
+            PerformanceMeter.StopStopwatch(0);
+            
             parent.parent.SetData("target", FindNearestEat(_transform)); // vector3
             parent.parent.SetData("hunger", _hunger.Hungry - 40);
                 

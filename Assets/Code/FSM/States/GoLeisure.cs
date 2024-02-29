@@ -20,11 +20,15 @@ public class GoLeisure : BaseState
         var randomIndex = random.Next(0, locations.Count);
 
         _targetLocation = locations[randomIndex];
+        
+        Logger.WriteLog("Going to " + _targetLocation.Typ + ". [No other needs to fulfill]");
+        PerformanceMeter.StopStopwatch(3);
     }
 
     public override void Update()
     {
         base.Update();
+        PerformanceMeter.StartStopwatch();
         var check = TransitionChecker.CheckTransition(_stateMachine);
         if (check.transition)
         {
@@ -32,6 +36,7 @@ public class GoLeisure : BaseState
         }
         else
         {
+            PerformanceMeter.ResetStopwatch();
             _stateMachine.transform.position = Vector3.MoveTowards
             (
                 _stateMachine.transform.position,

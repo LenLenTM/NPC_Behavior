@@ -8,11 +8,14 @@ public class GoEat : BaseState
     public override void Enter()
     {
         base.Enter();
+        Logger.WriteLog("Going to a source of food. [Hunger < 62]");
+        PerformanceMeter.StopStopwatch(1);
     }
 
     public override void Update()
     {
         base.Update();
+        PerformanceMeter.StartStopwatch();
         var check = TransitionChecker.CheckTransition(_stateMachine);
         if (check.transition)
         {
@@ -20,6 +23,7 @@ public class GoEat : BaseState
         }
         else
         {
+            PerformanceMeter.ResetStopwatch();
             var targetLocation = World.Locations.Where(l => l.Typ == Locations.Eat).OrderBy(l => Vector3.Distance(l.transform.position, _stateMachine.transform.position)).First();
             _stateMachine.transform.position = Vector3.MoveTowards
             (

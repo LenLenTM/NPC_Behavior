@@ -13,6 +13,13 @@ public class BT_Entity : Tree
     private TextMeshPro _tirednessIndicator;
     private TextMeshPro _work2DoIndicator;
 
+    public void ResetStats()
+    {
+        Hunger = new Hunger(55f);
+        Sleep = new Sleep(0f);
+        Work = new Work(55f);
+    }
+    
     protected override Node SetupTree()
     {
         InitChildren();
@@ -108,5 +115,20 @@ public class BT_Entity : Tree
         _hungerIndicator.SetText("Hunger: " + Math.Round(Hunger.Hungry, 2));
         _tirednessIndicator.SetText("Tiredness: " + Math.Round(Sleep.Tiredness, 2));
         _work2DoIndicator.SetText("Work2Do: " + Math.Round(Work.Work2Do, 2));
+    }
+    
+    public void UpdateHunger(double value)
+    {
+        Hunger.Hungry += value;
+    }
+        
+    public void UpdateTiredness(double value)
+    {
+        Sleep.Tiredness += value;
+    }
+        
+    public void UpdateWork(double value)
+    {
+        Work.Work2Do += value;
     }
 }
