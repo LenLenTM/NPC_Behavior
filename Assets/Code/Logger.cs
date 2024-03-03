@@ -35,4 +35,9 @@ public class Logger : MonoBehaviour
                 }
                 _textField.text = log;
         }
+
+        public static void ResetLog()
+        {
+                _logEntries = new List<string>();
+        }
 }

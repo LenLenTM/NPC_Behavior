@@ -18,13 +18,13 @@ public class BackToMenu : MonoBehaviour
 
                 BT_Entity.GetComponent<BT_Entity>().ResetStats();
                 FSM_Entity.GetComponent<FSM_Entity>().ResetStats();
+                GOAP_Entity.GetComponent<GOAP_Entity>().ResetStats();
                 
                 WorldObject.SetActive(false);
                 Menu.SetActive(true);
                 FSM_Entity.SetActive(false);
                 BT_Entity.SetActive(false);
                 GOAP_Entity.SetActive(false);
-                
-                
+                Logger.ResetLog();
         }
 }
