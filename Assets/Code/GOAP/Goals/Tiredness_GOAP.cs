@@ -14,9 +14,10 @@ public class Tiredness_GOAP : BaseGoal
 
     public override void UpdatePriority()
     {
-        if (entity.Sleep.Tiredness > 80 || World.Time.Hour > 22)
+        if ((entity.Sleep.Tiredness > 80 || World.Time.Hour > 22) && priority != 85)
         {
             priority = 85;
+            Logger.WriteLog("[Goal] Tiredness priority changed to [85].");
         }
         else if (entity.Sleep.Tiredness <= 5 && World.Time.Hour < 22 && World.Time.Hour > 6)
         {

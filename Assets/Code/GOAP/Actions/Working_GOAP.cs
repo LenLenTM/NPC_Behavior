@@ -11,6 +11,7 @@ public class Working_GOAP : BaseAction
     {
         PreconditionType = typeof(Vector3);
         ResultType = typeof(Work);
+        name = "Working";
     }
         
     public override void Initialize(object initializer)
@@ -25,8 +26,6 @@ public class Working_GOAP : BaseAction
 
     public override bool Action()
     {
-        Debug.Log("Working");
-        
         GOAP_Entity.Work.Work2Do -= 0.003 * World.Speed;
                 
         return GOAP_Entity.Work.Work2Do <= 1;

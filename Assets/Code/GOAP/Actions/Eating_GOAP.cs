@@ -11,6 +11,7 @@ public class Eating_GOAP : BaseAction
     {
         PreconditionType = typeof(Vector3);
         ResultType = typeof(Hunger);
+        name = "Eating";
     }
         
     public override void Initialize(object initializer)
@@ -25,8 +26,6 @@ public class Eating_GOAP : BaseAction
 
     public override bool Action()
     {
-        Debug.Log("Eating");
-        
         entity.Hunger.Hungry -= 0.025 * World.Speed;
                 
         return entity.Hunger.Hungry <= _targetHunger;

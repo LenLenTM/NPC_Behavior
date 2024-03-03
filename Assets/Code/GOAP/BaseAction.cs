@@ -14,6 +14,7 @@ public class BaseAction : IBaseAction
         public Type ResultType = null;
         public Type PreconditionType = null;
         public GOAP_Entity entity;
+        public string name = "BaseAction";
 
         public BaseAction(GOAP_Entity goapEntity)
         {

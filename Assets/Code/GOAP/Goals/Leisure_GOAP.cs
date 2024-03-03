@@ -13,11 +13,12 @@ public class Leisure_GOAP : BaseGoal
 
     public override void UpdatePriority()
     {
-        if (World.Time.Hour < 20 && World.Time.Hour > 8)
+        if (World.Time.Hour is < 20 and > 8 && priority != 40)
         {
             priority = 40;
+            Logger.WriteLog("[Goal] Leisure priority changed to [40].");
         }
-        else
+        else if(World.Time.Hour is > 20 or < 8)
         {
             priority = 0;
         }

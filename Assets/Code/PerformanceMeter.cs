@@ -14,9 +14,9 @@ public class PerformanceMeter
                 }
         }
 
-        public static void StopStopwatch(int state)
+        public static void StopStopwatch(int state, bool needState = true)
         {
-                if (_state == state) ResetStopwatch();
+                if (_state == state && needState) ResetStopwatch();
                 _state = state;
                 
                 _stopwatch.Stop();

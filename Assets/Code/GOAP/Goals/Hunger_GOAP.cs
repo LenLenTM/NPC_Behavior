@@ -13,8 +13,9 @@ public class Hunger_GOAP : BaseGoal
 
     public override void UpdatePriority()
     {
-        if (entity.Hunger.Hungry > 62)
+        if (entity.Hunger.Hungry > 62 && priority != 90)
         {
+            Logger.WriteLog("[Goal] Hunger priority changed to [90].");
             priority = 90;
         }
         else if (entity.Hunger.Hungry <= goal)

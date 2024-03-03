@@ -8,6 +8,7 @@ public class Planner
         private List<BaseAction> _plan; // stores the plan for execution and checking the last link in the plan if it still fulfills the current goal
 
         private BaseGoal _currentGoal = null;
+        private bool changedGoal = false;
         
         public Planner(){}
         
@@ -38,6 +39,7 @@ public class Planner
                         _currentGoal = highestPriority;
                         _currentGoal.Initialize();
                         _plan = new List<BaseAction>();
+                        changedGoal = true;
                 }
         }
 
@@ -51,6 +53,8 @@ public class Planner
 
         private void Plan(List<BaseAction> actions)
         {
+                PerformanceMeter.StartStopwatch();
+                
                 _plan = new List<BaseAction>();
                 BaseAction nextStep = null;
 
@@ -58,8 +62,6 @@ public class Planner
                 {
                         if (action.ResultType == _currentGoal.GoalType)
                         {
-                                Debug.Log(_currentGoal.name);
-                                Debug.Log(action);
                                 nextStep = action;
                                 nextStep.Initialize(_currentGoal.GetGoalValue());
                                 nextStep.InitializePreConValue();
@@ -85,10 +87,25 @@ public class Planner
                                 }
                         }
                 }
+
+                if (Logger.GetLastEntry().Contains("Calculation time"))
+                {
+                        PerformanceMeter.ResetStopwatch();
+                }
+                else
+                {
+                        PerformanceMeter.StopStopwatch(1, false);
+                }
         }
 
         private void ExecutePlan()
         {
+                if (changedGoal)
+                {
+                        Logger.WriteLog("Action: " + _plan.Last().name + " | Goal: " + _currentGoal.name + " [priority: " + _currentGoal.priority + "]");
+                        changedGoal = false;
+                }
+                
                 if (_plan.Last().Action())
                 {
                         _plan.RemoveAt(_plan.Count -1);

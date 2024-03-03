@@ -11,6 +11,7 @@ public class Sleeping_GOAP : BaseAction
     {
         PreconditionType = typeof(Vector3);
         ResultType = typeof(Sleep);
+        name = "Sleeping";
     }
         
     public override void Initialize(object initializer)
@@ -25,8 +26,6 @@ public class Sleeping_GOAP : BaseAction
 
     public override bool Action()
     {
-        Debug.Log("Sleeping");
-        
         entity.Sleep.Tiredness -= 0.00454 * World.Speed;
                 
         return entity.Hunger.Hungry <= targetTiredness;

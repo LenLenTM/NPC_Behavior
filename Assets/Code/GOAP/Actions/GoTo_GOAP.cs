@@ -10,6 +10,7 @@ public class GoTo_GOAP : BaseAction
         {
                 PreconditionType = null;
                 ResultType = typeof(Vector3);
+                name = "GoToLocation";
         }
         
         public override void Initialize(object initializer)
@@ -19,8 +20,6 @@ public class GoTo_GOAP : BaseAction
 
         public override bool Action()
         {
-                Debug.Log("Go To");
-                
                 entity.transform.position = Vector3.MoveTowards
                 (
                         entity.transform.position,

@@ -40,4 +40,9 @@ public class Logger : MonoBehaviour
         {
                 _logEntries = new List<string>();
         }
+
+        public static string GetLastEntry()
+        {
+                return _logEntries.Count != 0 ? _logEntries.Last() : "";
+        }
 }
